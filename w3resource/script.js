@@ -70,8 +70,8 @@ function sumArray(array, result = 0, count = 0) {
 // Note : The exponent of a number says how many times the base number is used as a factor.
 // 82 = 8 x 8 = 64. Here 8 is the base and 2 is the exponent.
 function getExponent(num, base, result = 1) {
-  if (num % base !== 0 ){
-    console.log(`Invalid input. ${base} is not a base of ${num}.`)
+  if (num % base !== 0) {
+    console.log(`Invalid input. ${base} is not a base of ${num}.`);
     return;
   }
   if (num === base) {
@@ -84,6 +84,27 @@ function getExponent(num, base, result = 1) {
 
 // 6. Write a JavaScript program to get the first n Fibonacci numbers.
 // Note : The Fibonacci Sequence is the series of numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, . . . Each subsequent number is the sum of the previous two.
+function getNFibonacci(n, count = 3, result = [0, 1]) {
+  /**
+   * カウント1回目[0]を返す
+   * カウント2回目[0, 1]を返す
+   * カウント3回目以降、[0, 1]にarr.[カウント回数-2]＋arr.[カウント回数-1]をpushする。
+   * カウントがnに達したところでreturnする。
+   */
+  if (n === 1) {
+    return [0];
+  }
+  if (n === 2) {
+    return [0, 1];
+  }
+  if (count === n) {
+    result.push(result[count - 3] + result[count - 2]);
+    return result;
+  }
+  result.push(result[count - 3] + result[count - 2]);
+  count++;
+  return getNFibonacci(n, count, result);
+}
 
 // 7. Write a JavaScript program to check whether a number is even or not.
 
