@@ -107,11 +107,66 @@ function getNFibonacci(n, count = 3, result = [0, 1]) {
 }
 
 // 7. Write a JavaScript program to check whether a number is even or not.
+function isEven(n) {
+  if (n === 0) {
+    return true;
+  }
+  if (n === 1) {
+    return false;
+  }
+  n = n - 2;
+  return isEven(n);
+}
 
 // 8. Write a JavaScript program for binary search.
 // Sample array : [0,1,2,3,4,5,6]
 // console.log(l.br_search(5)) will return '5'
 
+function binarySearch(array, value) {
+  //check if value is within the range (i.e. between arry[0]-array[array.length-1])
+  if (array[0] > value || array[array.length - 1] < value) {
+    return false;
+  }
+  //base case when array has only one element
+  if (array.length === 1) {
+    if (array[0] === value) {
+      return value;
+    } else {
+      return false;
+    }
+  }
+  //check if the number of elements is even (as even and odd length requires different way to split)
+  let evenLength;
+  if (array.length % 2 === 0) {
+    evenLength = true;
+  } else {
+    evenLength = false;
+  }
+
+  //mid is where the array is halved.
+  let mid;
+  if (evenLength) {
+    mid = array.length / 2;
+  } else {
+    mid = Math.floor(array.length / 2);
+  }
+
+  if (evenLength) {
+    if (array[mid - 1] >= value) {
+      let arr = array.slice(0, mid);
+      return binarySearch(arr, value);
+    }
+    let arr = array.slice(mid);
+    return binarySearch(arr, value);
+  } else {
+    if (array[mid] >= value) {
+      let arr = array.slice(0, mid + 1);
+      return binarySearch(arr, value);
+    }
+    let arr = array.slice(mid + 1);
+    return binarySearch(arr, value);
+  }
+}
 // 9. Write a merge sort program in JavaScript.
 // Sample array : [34,7,23,32,5,62]
 // Sample output : [5, 7, 23, 32, 34, 62]
