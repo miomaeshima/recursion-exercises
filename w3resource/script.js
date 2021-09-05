@@ -57,6 +57,15 @@ function range(x, y, result = []) {
 // Example : var array = [1, 2, 3, 4, 5, 6]
 // Expected Output : 21
 
+function sumArray(array, result = 0, count = 0) {
+  if (count === array.length) {
+    return result;
+  }
+  result += array[count];
+  count++;
+  return sumArray(array, result, count);
+}
+
 // 5. Write a JavaScript program to compute the exponent of a number.
 // Note : The exponent of a number says how many times the base number is used as a factor.
 // 82 = 8 x 8 = 64. Here 8 is the base and 2 is the exponent.
