@@ -69,6 +69,18 @@ function sumArray(array, result = 0, count = 0) {
 // 5. Write a JavaScript program to compute the exponent of a number.
 // Note : The exponent of a number says how many times the base number is used as a factor.
 // 82 = 8 x 8 = 64. Here 8 is the base and 2 is the exponent.
+function getExponent(num, base, result = 1) {
+  if (num % base !== 0 ){
+    console.log(`Invalid input. ${base} is not a base of ${num}.`)
+    return;
+  }
+  if (num === base) {
+    return result;
+  }
+  num = num / base;
+  result++;
+  return getExponent(num, base, result);
+}
 
 // 6. Write a JavaScript program to get the first n Fibonacci numbers.
 // Note : The Fibonacci Sequence is the series of numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, . . . Each subsequent number is the sum of the previous two.
