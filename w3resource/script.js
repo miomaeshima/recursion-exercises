@@ -1,27 +1,41 @@
-"use strict"
+"use strict";
 
 // JavaScript Recursion [9 exercises with solution]
 // Use recursion to solve the following exercises.
 
 // 1. Write a JavaScript program to calculate the factorial of a number. Go to the editor
-// In mathematics, the factorial（階乗） of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n. For example, 5! = 5 x 4 x 3 x 2 x 1 = 120  
+// In mathematics, the factorial（階乗） of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n. For example, 5! = 5 x 4 x 3 x 2 x 1 = 120
+//factorial(0) and factorial(1) should be both 1
 
-function factorial(n){
-    if (typeof n !== "number" || n < 0){
-        return "Invalid input. Enter a positive integer."
-    }
-    if (n === 0){
-        return 1;
-    }
-    return n * factorial(n-1);
+function factorial(n) {
+  if (typeof n !== "number" || n < 0) {
+    return "Invalid input. Enter a positive integer.";
+  }
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n - 1);
 }
 
+//answer can be a very big number. If it is 21 digis or more, js displays in the format of scientific notation (i.e. with e+<number of digits>)
 
+// 2. Write a JavaScript program to find the greatest common divisor (gcd) of two positive numbers.
 
+function findGcd(num1, num2, divider = 1) {
+  const max = Math.max(num1, num2);
+  const min = Math.min(num1, num2);
+  if (min % divider === 0 && max % (min / divider) === 0) {
+    return min / divider;
+  }
+  divider++;
+  return findGcd(max, min, divider);
+}
 
+console.log("hellohello");
 
-// 2. Write a JavaScript program to find the greatest common divisor (gcd) of two positive numbers. Go to the editor
-// Click me to see the solution.
+function find() {
+  return 3;
+}
 
 // 3. Write a JavaScript program to get the integers in range (x, y). Go to the editor
 // Example : range(2, 9)
