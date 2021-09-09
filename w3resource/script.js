@@ -135,38 +135,25 @@ function binarySearch(array, value) {
       return false;
     }
   }
-  //check if the number of elements is even (as even and odd length requires different way to split)
-  let evenLength;
-  if (array.length % 2 === 0) {
-    evenLength = true;
-  } else {
-    evenLength = false;
+  let mid = Math.ceil(array.length / 2) - 1;
+  if (array[mid] >= value) {
+    return binarySearch(array.slice(0, mid + 1), value);
   }
+  return binarySearch(array.slice(mid+1), value);
+}
 
-  //mid is where the array is halved.
-  let mid;
-  if (evenLength) {
-    mid = array.length / 2;
-  } else {
-    mid = Math.floor(array.length / 2);
-  }
-
-  if (evenLength) {
-    if (array[mid - 1] >= value) {
-      let arr = array.slice(0, mid);
-      return binarySearch(arr, value);
-    }
-    let arr = array.slice(mid);
-    return binarySearch(arr, value);
-  } else {
-    if (array[mid] >= value) {
-      let arr = array.slice(0, mid + 1);
-      return binarySearch(arr, value);
-    }
-    let arr = array.slice(mid + 1);
-    return binarySearch(arr, value);
-  }
+function splitNum(array, num) {
+  //return Math.ceil(num/2);
+  return array[Math.ceil(array.length) - 1] >= num;
 }
 // 9. Write a merge sort program in JavaScript.
 // Sample array : [34,7,23,32,5,62]
 // Sample output : [5, 7, 23, 32, 34, 62]
+
+// function mergeSort (array){
+//   const arr = [];
+//   for (let ele of array){
+//     array.push([ele])
+//   }
+//   console.log(arr);
+// }
