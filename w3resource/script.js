@@ -157,7 +157,10 @@ function mergeSort(array) {
     decomposedArray.push([ele]);
   }
 
-  //（１）親アレイの子アレイを最初から二つを一つにし、それを繰り返して、最後できたアレイが1つだけの要素になるまで繰り返す関数を定義。（２）を使う。
+  //バラバラになったアレイdecomposedArrayを最終的に並べ替えて一つのアレイにする関数に渡す。この関数は、下に定義。
+  return reduceArray(decomposedArray);
+
+  //（１）親アレイの要素を半数にする関数（２）を、要素が1つになるまで繰り返す関数。
   function reduceArray(array) {
     if (array.length === 1) {
       return array[0];
@@ -166,7 +169,7 @@ function mergeSort(array) {
     return reduceArray(array);
   }
 
-  //（２）親アレイの子アレイの最初の二つずつを一つにする関数を定義（３）を使う。
+  //（２）親アレイの子アレイを（３）を使って二つずつを一つにして半分の要素にする関数。
   function halveArray(array, newArray = []) {
     if (array.length === 0) {
       return newArray;
@@ -183,7 +186,7 @@ function mergeSort(array) {
     return halveArray(array, newArray);
   }
 
-  // （３）二つのarrayをマージする関数を定義
+  // （３）二つのアレイを小さい要素からマージする関数を定義
   function mergeTwo(array1, array2, newArray = []) {
     //array1もarray2も空のとき
     if (array1.length === 0 && array2.length === 0) {
@@ -209,7 +212,4 @@ function mergeSort(array) {
     array2.shift();
     return mergeTwo(array1, array2, newArray);
   }
-
-  //(1)の関数にdecomposedArrayを渡す。
-  return reduceArray(decomposedArray);
 }
