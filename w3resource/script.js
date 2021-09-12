@@ -139,7 +139,7 @@ function binarySearch(array, value) {
   if (array[mid] >= value) {
     return binarySearch(array.slice(0, mid + 1), value);
   }
-  return binarySearch(array.slice(mid+1), value);
+  return binarySearch(array.slice(mid + 1), value);
 }
 
 function splitNum(array, num) {
@@ -150,10 +150,66 @@ function splitNum(array, num) {
 // Sample array : [34,7,23,32,5,62]
 // Sample output : [5, 7, 23, 32, 34, 62]
 
-// function mergeSort (array){
-//   const arr = [];
-//   for (let ele of array){
-//     array.push([ele])
-//   }
-//   console.log(arr);
-// }
+function mergeSort(array) {
+  //まずアレイを一つずつ要素が入った子アレイを持つ親アレイにする。
+  const decomposedArray = [];
+  for (let ele of array) {
+    decomposedArray.push([ele]);
+  }
+
+  //（１）親アレイの子アレイを最初から二つを一つにし、それを繰り返して、最後できたアレイが1つだけの要素になるまで繰り返す関数を定義。（２）を使う。
+  function reduceArray(array) {
+    if (array.length === 1) {
+      return array[0];
+    }
+    array = halveArray(array);
+    return reduceArray(array);
+  }
+
+  //（２）親アレイの子アレイの最初の二つずつを一つにする関数を定義（３）を使う。
+  function halveArray(array, newArray = []) {
+    if (array.length === 0) {
+      return newArray;
+    }
+    if (array.length === 1) {
+      newArray.push(array[0]);
+      array.shift();
+      return halveArray(array, newArray);
+    }
+    newArray.push(mergeTwo(array[0], array[1]));
+    array.shift();
+    array.shift();
+    // console.log(array.length);
+    return halveArray(array, newArray);
+  }
+
+  // （３）二つのarrayをマージする関数を定義
+  function mergeTwo(array1, array2, newArray = []) {
+    //array1もarray2も空のとき
+    if (array1.length === 0 && array2.length === 0) {
+      return newArray;
+    }
+    if (array1.length === 0) {
+      newArray.push(array2[0]);
+      array2.shift();
+      return mergeTwo(array1, array2, newArray);
+    }
+    if (array2.length === 0) {
+      newArray.push(array1[0]);
+      array1.shift();
+      return mergeTwo(array1, array2, newArray);
+    }
+    if (array1[0] <= array2[0]) {
+      newArray.push(array1[0]);
+      array1.shift();
+
+      return mergeTwo(array1, array2, newArray);
+    }
+    newArray.push(array2[0]);
+    array2.shift();
+    return mergeTwo(array1, array2, newArray);
+  }
+
+  //(1)の関数にdecomposedArrayを渡す。
+  return reduceArray(decomposedArray);
+}
